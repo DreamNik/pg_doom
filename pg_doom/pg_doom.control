@@ -1,0 +1,6 @@
+# pg_doom extension
+comment         = 'Provides ability to play the game.'
+default_version = '1.0'
+relocatable     = false
+module_pathname = '$libdir/pg_doom'
+schema          = doom
