@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <stdlib.h>
 #include "doom.h"
 
 #include "d_main.h"
