@@ -9,7 +9,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 		postgresql-server-dev-all
 
 # Добавляем путь до исполняемых файлов PostgreSQL 15
-ENV PATH=/usr/lib/postgresql/15/bin:$PATH
+ENV PATH=/usr/lib/postgresql/16/bin:$PATH
 
 # Копируем, собираем и устанавливаем расширение
 COPY pg_doom /build
@@ -19,5 +19,8 @@ RUN cd /build && \
 	cd .. && \
 	rm -rf /build
 
+COPY pg_doom/pg_doom_client.sh .
+COPY pg_doom/pg_doom_server.sh .
+
 USER postgres
-CMD [ "bash", "-c", "pg_doom_server /tmp/pg_doom_db start && pg_doom_client -h 127.0.0.1 -U slayer -d doomdb || cat /tmp/pg_doom_db/server.log" ]
+CMD [ "bash", "-c", "./pg_doom_server.sh /tmp/pg_doom_db start && ./pg_doom_client.sh -h 127.0.0.1 -U slayer -d doomdb || cat /tmp/pg_doom_db/server.log" ]
