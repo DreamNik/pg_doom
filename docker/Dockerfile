@@ -19,8 +19,5 @@ RUN cd /build && \
 	cd .. && \
 	rm -rf /build
 
-COPY pg_doom/pg_doom_client.sh .
-COPY pg_doom/pg_doom_server.sh .
-
 USER postgres
-CMD [ "bash", "-c", "./pg_doom_server.sh /tmp/pg_doom_db start && ./pg_doom_client.sh -h 127.0.0.1 -U slayer -d doomdb || cat /tmp/pg_doom_db/server.log" ]
+CMD [ "bash", "-c", "pg_doom_server /tmp/pg_doom_db start && pg_doom_client -h 127.0.0.1 -U slayer -d doomdb || cat /tmp/pg_doom_db/server.log" ]
